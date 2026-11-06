@@ -125,7 +125,14 @@ function renderItems() {
       row.id = `item-${line.item.id}`;
       const fields = element('div', undefined, 'item-fields');
       const foodSelect = element('select');
-      for (const food of state.foods) option(foodSelect, food.id, food.name);
+      for (const foodCategory of state.categories) {
+        const foods = state.foods.filter(food => food.categoryId === foodCategory.id);
+        if (!foods.length) continue;
+        const group = element('optgroup');
+        group.label = foodCategory.name;
+        for (const food of foods) option(group, food.id, text.foodOption(foodCategory.name, food.name));
+        foodSelect.append(group);
+      }
       foodSelect.value = line.food.id;
       foodSelect.addEventListener('change', () => {
         line.item.foodId = foodSelect.value;

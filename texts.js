@@ -1,4 +1,5 @@
 export const text = {
+  foodOption: (category, name) => `${category} · ${name}`,
   versionLabel: version => `Version ${version.appVersion} · Offline-Version ${version.cacheVersion}`,
   updateAvailable: version => `Neue Version ${version} verfügbar.`,
   updateReady: 'Eine neue Version ist bereit.',
