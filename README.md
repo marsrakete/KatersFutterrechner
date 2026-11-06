@@ -22,15 +22,32 @@ Im Projektverzeichnis `npm start` ausführen (Python 3 erforderlich) und `http:/
 
 ## Auf einem Webserver bereitstellen
 
-`index.html`, `styles.css`, `app.js`, `data.js`, `texts.js`, `calculation.js`, `storage.js`, `manifest.webmanifest`, `sw.js`, `og-image.jpg` und den Ordner `icons/` zusammen auf einen statischen **HTTPS-Webserver** hochladen. Unterverzeichnisse werden unterstützt. PHP und eine Server-Datenbank sind nicht nötig. HTTPS ist für Service Worker und Installation erforderlich; localhost ist für die Entwicklung ausgenommen.
+`index.html`, `styles.css`, `app.js`, `data.js`, `texts.js`, `presentation.js`, `updates.js`, `version.js`, `version.json`, `calculation.js`, `storage.js`, `manifest.webmanifest`, `sw.js`, `og-image.jpg` und den Ordner `icons/` zusammen auf einen statischen **HTTPS-Webserver** hochladen. Unterverzeichnisse werden unterstützt. PHP und eine Server-Datenbank sind nicht nötig. HTTPS ist für Service Worker und Installation erforderlich; localhost ist für die Entwicklung ausgenommen.
 
 Auf dem iPhone in Safari „Teilen“ → „Zum Home-Bildschirm“ wählen. Andere unterstützte Browser bieten eine Installation über ihr Menü oder die eingeblendete Schaltfläche an. Die tatsächliche iOS-Installation wurde noch nicht auf einem iPhone geprüft.
 
 Die Daten sind an Browser und Origin (Protokoll, Host und Port) gebunden. Ein Serverwechsel übernimmt sie nicht automatisch. Dafür auf dem alten Gerät exportieren und am neuen Standort importieren. Beim Import werden die aktuellen Daten nach Bestätigung ersetzt. Browserdaten können gelöscht werden; regelmäßig JSON-Sicherungen erstellen.
 
-Bei Änderungen an den offline gespeicherten Dateien die Cache-Version in `sw.js` erhöhen. Ein aktualisierter Service Worker wird nach dem Schließen der bisherigen App-Fenster aktiv.
+### Neue Versionen erkennen und veröffentlichen
+
+Der Ablauf folgt Threadline: `version.js` enthält den lokal geladenen App- und Cache-Stand; `version.json` liefert die veröffentlichten Versionsdaten. Die App prüft beim Start, bei Rückkehr in den Vordergrund beziehungsweise Fokus und zusätzlich alle drei Minuten im sichtbaren Fenster. Automatische Fokusprüfungen haben mindestens drei Minuten Abstand; eine wiederhergestellte Online-Verbindung löst ebenfalls eine Prüfung aus. „Nach Updates suchen“ im Fußbereich prüft jederzeit manuell.
+
+Eine neue Version erscheint als Hinweis mit „Jetzt aktualisieren“. Vor dem Aktivieren und dem einmaligen Neuladen wird die Ration in IndexedDB gespeichert. Auch bei einer Aktivierung durch ein anderes App-Fenster speichert die Seite vor dem Neuladen. Die erste Installation lädt die Seite nicht unnötig neu. Anders als Threadlines unmittelbare Aktivierung wartet der Futterrechner auf die Update-Schaltfläche, damit eine laufende Eingabe nicht durch ein Hintergrundupdate unterbrochen wird.
+
+`version.json` wird direkt aus dem Netzwerk ohne Cache-Fallback geladen. Offline bleibt die App nutzbar; eine manuelle Versionsprüfung meldet dann, dass sie nicht möglich ist. Neue App-Dateien werden vollständig heruntergeladen, bevor die Version bereitsteht. Schlägt die Installation fehl, bleibt die bisherige Version aktiv.
+
+Für jede Veröffentlichung:
+
+1. `appVersion` und `cacheVersion` in `version.json` erhöhen und `label` anpassen.
+2. `npm run version:sync` ausführen, um `version.js` zu erzeugen.
+3. `npm test` ausführen. Der Versionstest prüft die Übereinstimmung beider Dateien.
+4. Alle App-Dateien einschließlich beider Versionsdateien gemeinsam veröffentlichen, möglichst atomar. Kein zusätzliches manuelles Ändern des Cache-Namens in `sw.js` nötig.
+
+Der Versionsstand ist unabhängig von der Version des Datenformats in IndexedDB. Updates löschen keine Futterdaten. Geprüft in Chromium mit zwei simulierten Veröffentlichungen: Erkennung, Aktivierung, Erhalt der Ration, Bereinigung alter App-Caches, fehlgeschlagener Download und Offline-Neustart.
 
 ## Entwicklung und Prüfung
+
+Die Rationsansicht orientiert sich an der übergebenen Bildvorlage: Katzenkopf im Kopfbereich, Tagesziel mit Plus/Minus (10 kcal pro Schritt), farbiger Kalorienbalken mit Kategorieanteilen, Radioauswahl der automatisch berechneten Position und getrennte Futterbereiche. Mehrere Positionen derselben Kategorie bleiben möglich. Snacks haben Stückzähler; Schleckpaste bleibt ein eigener Bereich. Direkt geänderte Kalorienwerte gelten für das jeweilige gespeicherte Futtermittel. Futterverwaltung, Kategorien und Datensicherung sind darunter aufklappbar. „Zurücksetzen“ leert nach Bestätigung die Tagesration, erhält aber die Futtermittel.
 
 ### Open Graph und Favicon
 

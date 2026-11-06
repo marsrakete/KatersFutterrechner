@@ -25,23 +25,29 @@
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="styles.css">
+  <script src="version.js"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>
 <main>
-  <header><span class="eyebrow">KATZE AUF DIÄT</span><h1>Katers Futterrechner</h1><p>Eine passende Tagesration aus deinen Futtersorten zusammenstellen.</p><button id="install" hidden>App installieren</button></header>
-  <p id="notice" role="status" aria-live="polite"></p>
+  <header class="app-header">
+    <div class="brand"><img src="icons/cat.svg" width="88" height="88" alt=""><div><h1>Katers Futterrechner</h1><p>Tagesration zusammenstellen</p></div></div>
+    <div class="budget-control"><label for="budget">Tagesziel (kcal)</label><div class="stepper"><button id="budget-minus" class="secondary" aria-label="Tagesziel um 10 kcal senken">−</button><input id="budget" type="number" min="1" step="any" required><button id="budget-plus" class="secondary" aria-label="Tagesziel um 10 kcal erhöhen">+</button></div></div>
+    <button id="install" hidden>App installieren</button>
+  </header>
+  <aside id="update-banner" class="update-banner" role="status" hidden><span id="update-message"></span><button id="apply-update">Jetzt aktualisieren</button></aside>
   <section class="summary" aria-label="Kalorienübersicht">
-    <div class="summary-top"><div><span>Gesamtration</span><div class="total"><span id="total">0</span> <small>kcal</small></div></div><label>Tagesbudget (kcal)<input id="budget" type="number" min="1" step="any" required></label></div>
-    <progress id="progress" max="300" value="0" aria-label="Anteil am Tagesbudget"></progress>
-    <p id="balance" aria-live="polite"></p>
+    <div class="summary-top"><div><span>Gesamtration</span><div class="total"><span id="total">0,0</span> <small>kcal</small><span id="target-check" hidden aria-label="Tagesziel erreicht">✓</span></div></div><div class="balance-block"><span id="balance-label">Noch verfügbar</span><div class="total"><span id="balance" aria-live="polite">0,0</span> <small>kcal</small></div></div></div>
+    <div id="progress" class="calorie-bar" role="img" aria-label="Kalorienanteile nach Kategorie"></div>
+    <div id="legend" class="legend"></div>
   </section>
-  <section>
-    <h2>Tagesration</h2><p>Ändere die Mengen. Eine ausgewählte Position füllt das verbleibende Budget automatisch auf.</p>
-    <label>Automatisch berechnen<select id="auto"></select></label>
+  <section class="ration">
+    <fieldset class="auto-fieldset"><legend>Welche Menge soll automatisch berechnet werden?</legend><div id="auto" class="auto-options"></div></fieldset>
     <div id="items"></div>
-    <div class="actions"><button id="add-item">+ Futter hinzufügen</button><button id="copy">Ration kopieren</button><button id="clear" class="secondary">Ration leeren</button></div>
+    <div class="actions ration-actions"><button id="clear" class="secondary">↶ Zurücksetzen</button><button id="add-item" class="secondary">+ Futter hinzufügen</button><button id="copy">▢ Ration kopieren</button></div>
   </section>
+  <p id="notice" role="status" aria-live="polite"></p>
+  <details class="management"><summary>Futtermittel, Kategorien &amp; Datensicherung verwalten</summary>
   <section>
     <h2>Futtermittel</h2><p>Kalorien und Mengen beziehen sich auf die gewählte Einheit, unabhängig von der Kategorie.</p>
     <form id="food-form">
@@ -65,7 +71,8 @@
     <div class="actions"><button id="export">JSON exportieren</button><button id="import" class="secondary">JSON importieren</button><input id="import-file" type="file" accept="application/json,.json" hidden></div>
     <p class="hint">Zum Installieren auf dem iPhone: in Safari „Teilen“ → „Zum Home-Bildschirm“. Die App benötigt beim ersten Aufruf eine Verbindung und funktioniert danach offline. Gelöschte Browserdaten können auch die gespeicherte Ration entfernen.</p>
   </section>
-  <footer>Kalorienwerte auf der Packung prüfen. Das Tagesbudget wird hier als Vorgabe verwendet.</footer>
+  </details>
+  <footer><p>Kalorienwerte auf der Packung prüfen. Das Tagesbudget wird hier als Vorgabe verwendet.</p><div class="version-controls"><span id="version-label"></span><button id="check-updates" class="secondary">Nach Updates suchen</button></div><p id="update-status" role="status" aria-live="polite"></p></footer>
 </main>
 </body>
 </html>
