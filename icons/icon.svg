@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Katers Futterrechner – Katzenkopf</title>
+  <rect width="512" height="512" rx="112" fill="#68439b"/>
+  <path d="M128 251 138 128 225 184H287L374 128 384 251Z" fill="#f5e9dc"/>
+  <ellipse cx="256" cy="287" rx="133" ry="108" fill="#f5e9dc"/>
+  <g fill="#30243e"><ellipse cx="200" cy="266" rx="13" ry="15"/><ellipse cx="312" cy="266" rx="13" ry="15"/></g>
+  <path d="M235 307H277L256 333Z" fill="#68439b"/>
+</svg>

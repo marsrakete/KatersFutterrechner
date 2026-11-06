@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#68439b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Katers Futterrechner</title>
+  <meta name="description" content="Plane Katers Tagesration aus Nassfutter, Trockenfutter, Schleckpaste und Snacks. Mit Kalorienbudget, automatischer Mengenberechnung und lokaler Speicherung.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Katers Futterrechner">
+  <meta property="og:title" content="Katers Futterrechner">
+  <meta property="og:description" content="Nassfutter, Trockenfutter, Schleckpaste und Snacks passend zum Tagesbudget zusammenstellen – auch offline.">
+  <meta property="og:url" content="https://marsrakete.github.io/KatersFutterrechner/">
+  <meta property="og:image" content="https://marsrakete.github.io/KatersFutterrechner/icons/katers-futterrechner-og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Katers Futterrechner: Tagesbudget von 300 kcal mit Nassfutter, Trockenfutter, Schleckpaste und Snacks planen.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Katers Futterrechner">
+  <meta name="twitter:description" content="Nassfutter, Trockenfutter, Schleckpaste und Snacks passend zum Tagesbudget zusammenstellen – auch offline.">
+  <meta name="twitter:image" content="https://marsrakete.github.io/KatersFutterrechner/icons/katers-futterrechner-og.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+<main>
+  <header><span class="eyebrow">KATZE AUF DIÄT</span><h1>Katers Futterrechner</h1><p>Eine passende Tagesration aus deinen Futtersorten zusammenstellen.</p><button id="install" hidden>App installieren</button></header>
+  <p id="notice" role="status" aria-live="polite"></p>
+  <section class="summary" aria-label="Kalorienübersicht">
+    <div class="summary-top"><div><span>Gesamtration</span><div class="total"><span id="total">0</span> <small>kcal</small></div></div><label>Tagesbudget (kcal)<input id="budget" type="number" min="1" step="any" required></label></div>
+    <progress id="progress" max="300" value="0" aria-label="Anteil am Tagesbudget"></progress>
+    <p id="balance" aria-live="polite"></p>
+  </section>
+  <section>
+    <h2>Tagesration</h2><p>Ändere die Mengen. Eine ausgewählte Position füllt das verbleibende Budget automatisch auf.</p>
+    <label>Automatisch berechnen<select id="auto"></select></label>
+    <div id="items"></div>
+    <div class="actions"><button id="add-item">+ Futter hinzufügen</button><button id="copy">Ration kopieren</button><button id="clear" class="secondary">Ration leeren</button></div>
+  </section>
+  <section>
+    <h2>Futtermittel</h2><p>Kalorien und Mengen beziehen sich auf die gewählte Einheit, unabhängig von der Kategorie.</p>
+    <form id="food-form">
+      <div class="fields">
+        <label>Bezeichnung<input id="food-name" required maxlength="120" placeholder="z. B. Schleckpaste Lachs"></label>
+        <label>Kategorie<select id="food-category" required></select></label>
+        <label>Kalorienangabe<select id="food-unit"><option value="g">kcal je 100 g</option><option value="piece">kcal je Stück</option></select></label>
+        <label>Kalorien<input id="food-cal" type="number" min="0.01" step="any" required placeholder="120"></label>
+      </div>
+      <div class="actions"><button type="submit" id="save-food">Futtermittel speichern</button><button type="button" id="cancel-edit" class="secondary" hidden>Bearbeiten abbrechen</button></div>
+    </form>
+    <div id="foods"></div>
+  </section>
+  <section>
+    <h2>Kategorien</h2><p>Weitere Kategorien kannst du jederzeit ergänzen.</p>
+    <form id="category-form" class="inline-form"><label>Neue Kategorie<input id="category-name" required maxlength="60" placeholder="z. B. Ergänzungsfutter"></label><button type="submit">Kategorie hinzufügen</button></form>
+    <div id="categories" class="chips"></div>
+  </section>
+  <section>
+    <h2>Deine Daten</h2><p>Futtermittel und Ration bleiben in der Browser-Datenbank dieses Geräts. Sichere sie regelmäßig als JSON. Es gibt keine automatische Synchronisierung.</p>
+    <div class="actions"><button id="export">JSON exportieren</button><button id="import" class="secondary">JSON importieren</button><input id="import-file" type="file" accept="application/json,.json" hidden></div>
+    <p class="hint">Zum Installieren auf dem iPhone: in Safari „Teilen“ → „Zum Home-Bildschirm“. Die App benötigt beim ersten Aufruf eine Verbindung und funktioniert danach offline. Gelöschte Browserdaten können auch die gespeicherte Ration entfernen.</p>
+  </section>
+  <footer>Kalorienwerte auf der Packung prüfen. Das Tagesbudget wird hier als Vorgabe verwendet.</footer>
+</main>
+</body>
+</html>

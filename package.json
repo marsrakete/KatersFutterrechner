@@ -1,0 +1,14 @@
+{
+  "name": "katers-futterrechner",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 8080",
+    "build:og-image": "node scripts/build-og-images.js"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "sharp": "^0.35.2"
+  }
+}

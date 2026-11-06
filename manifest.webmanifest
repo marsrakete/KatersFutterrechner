@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Katers Futterrechner",
+  "short_name": "Futterrechner",
+  "lang": "de",
+  "description": "Tagesrationen für deinen Kater planen – mit lokal gespeicherten Futtermitteln.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f3f9",
+  "theme_color": "#68439b",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
