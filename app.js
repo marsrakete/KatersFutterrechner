@@ -139,24 +139,9 @@ function renderItems() {
         line.item.qty = 0;
         commit();
       });
-      const calories = element('input', undefined, 'food-calories');
-      calories.type = 'number';
-      calories.min = '0.01';
-      calories.step = 'any';
-      calories.required = true;
-      calories.value = line.food.cal;
-      calories.addEventListener('input', () => {
-        if (!calories.checkValidity() || !Number.isFinite(calories.valueAsNumber)) return;
-        line.food.cal = calories.valueAsNumber;
-        for (const other of document.querySelectorAll('.item')) {
-          if (other !== row && other.querySelector('select').value === line.food.id) other.querySelector('.food-calories').value = line.food.cal;
-        }
-        save();
-        refreshTotals();
-        renderFoods();
-      });
-      calories.addEventListener('change', () => { calories.value = line.food.cal; });
-      fields.append(field(text.variety, foodSelect), field(line.food.unit === 'g' ? text.perGrams : text.perPiece, calories));
+      const foodField = field(text.variety, foodSelect);
+      foodField.append(element('small', text.foodEnergy(formatCalories(line.food.cal), unitText(line.food)), 'food-energy'));
+      fields.append(foodField);
       const qty = element('input', undefined, 'quantity');
       qty.type = 'number';
       qty.min = '0';

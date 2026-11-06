@@ -46,6 +46,8 @@ p { color: #71647c; margin: 6px 0 18px; }
 .item { padding: 9px 0 0; }
 .item + .item { border-top: 1px dashed var(--line); margin-top: 12px; }
 .item-fields, .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 30px; }
+.item-fields { grid-template-columns: 1fr; }
+.food-energy { color: #71647c; font-size: .82rem; margin-top: 2px; }
 label { display: flex; flex-direction: column; gap: 4px; font-size: .97rem; font-weight: 500; min-width: 0; }
 input, select, button { font: inherit; }
 input, select { width: 100%; min-width: 0; padding: 8px 12px; border: 1px solid #afa4bd; border-radius: 9px; background: #fff; color: inherit; font-size: 1.1rem; box-shadow: inset 0 1px 3px #30243e0a; }
@@ -105,7 +107,7 @@ footer { margin-top: 16px; }
   .legend { flex-direction: column; gap: 8px; font-size: .82rem; }
   .legend-dot { width: 16px; height: 16px; }
   .calorie-bar { height: 20px; }
-  .item-fields { gap: 10px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .item-fields { gap: 10px; grid-template-columns: 1fr; }
   .group-heading h2 { font-size: 1.2rem; gap: 8px; }
   .group-total { font-size: 1rem; }
   input, select { font-size: 1rem; padding: 8px; }

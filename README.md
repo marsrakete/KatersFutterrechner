@@ -47,7 +47,7 @@ Der Versionsstand ist unabhängig von der Version des Datenformats in IndexedDB.
 
 ## Entwicklung und Prüfung
 
-Die Rationsansicht orientiert sich an der übergebenen Bildvorlage: Katzenkopf im Kopfbereich, Tagesziel mit Plus/Minus (10 kcal pro Schritt), farbiger Kalorienbalken mit Kategorieanteilen, Radioauswahl der automatisch berechneten Position und getrennte Futterbereiche. Mehrere Positionen derselben Kategorie bleiben möglich. Snacks haben Stückzähler; Schleckpaste bleibt ein eigener Bereich. Direkt geänderte Kalorienwerte gelten für das jeweilige gespeicherte Futtermittel. Futterverwaltung, Kategorien und Datensicherung sind darunter aufklappbar. „Zurücksetzen“ leert nach Bestätigung die Tagesration, erhält aber die Futtermittel.
+Die Rationsansicht orientiert sich an der übergebenen Bildvorlage: Katzenkopf im Kopfbereich, Tagesziel mit Plus/Minus (10 kcal pro Schritt), farbiger Kalorienbalken mit Kategorieanteilen, Radioauswahl der automatisch berechneten Position und getrennte Futterbereiche. Mehrere Positionen derselben Kategorie bleiben möglich. Snacks haben Stückzähler; Schleckpaste bleibt ein eigener Bereich. In der Tagesration werden nur Futtersorte und Menge gewählt; der hinterlegte Kalorienwert erscheint als Information. Kalorienwerte werden ausschließlich in der Futterverwaltung bearbeitet. Futterverwaltung, Kategorien und Datensicherung sind darunter aufklappbar. „Zurücksetzen“ leert nach Bestätigung die Tagesration, erhält aber die Futtermittel.
 
 ### Open Graph und Favicon
 

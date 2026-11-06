@@ -1,4 +1,5 @@
 export const text = {
+  foodEnergy: (value, unit) => `${value} kcal / ${unit}`,
   foodOption: (category, name) => `${category} · ${name}`,
   versionLabel: version => `Version ${version.appVersion} · Offline-Version ${version.cacheVersion}`,
   updateAvailable: version => `Neue Version ${version} verfügbar.`,
